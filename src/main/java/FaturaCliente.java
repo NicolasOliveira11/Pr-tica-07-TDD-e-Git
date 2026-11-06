@@ -1,7 +1,7 @@
 
 public class FaturaCliente {
 
-    private int id;
+    private final int id;
     private Cliente cliente;
     private double valor;
 
@@ -12,7 +12,7 @@ public class FaturaCliente {
     }
 
     public FaturaCliente(int id) {
-        this.id = id;
+        this(id, null, 0.0);
     }
 
     public int getId() {
@@ -36,13 +36,15 @@ public class FaturaCliente {
     }
 
     public double getValorComDesconto() {
-        return valor * (1 - cliente.getDesconto() / 100.0);
+        double percentualDesconto = cliente.getDesconto() / 100.0;
+        return valor * (1 - percentualDesconto);
     }
 
     @Override
     public String toString() {
-        return "Fatura [id=" + id
-                + ", cliente=" + cliente
-                + ", valor=" + valor + " ]";
+        return String.format(
+            "Fatura [id=%d, cliente=%s, valor=%s ]",
+            id, cliente, valor
+        );
     }
 }
