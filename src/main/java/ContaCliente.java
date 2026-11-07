@@ -1,9 +1,9 @@
 
 public class ContaCliente {
 
-    private int id;
+    private final int id;
     private Cliente cliente;
-    private double saldo = 0.0;
+    private double saldo;
 
     public ContaCliente(int id, Cliente cliente, double saldo) {
         this.id = id;
@@ -12,12 +12,11 @@ public class ContaCliente {
     }
 
     public ContaCliente(int id, Cliente cliente) {
-        this.id = id;
-        this.cliente = cliente;
+        this(id, cliente, 0.0);
     }
 
     public ContaCliente(int id) {
-        this.id = id;
+        this(id, null, 0.0);
     }
 
     public int getId() {
@@ -59,6 +58,7 @@ public class ContaCliente {
     @Override
     public String toString() {
         return String.format(
+            java.util.Locale.US,
             "%s(%d) saldo=R$%.2f",
             cliente.getNome(),
             id,
